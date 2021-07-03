@@ -264,3 +264,4 @@ Ask from someone
 3). Random Effect Model 
 ------------------------------
 ............................................................................................................................................
+putting an l. before a variable lags it by one period while i. specifies an indicator variable.
