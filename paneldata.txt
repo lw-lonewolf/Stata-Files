@@ -312,4 +312,48 @@ estimates table ols lsdv fixed aregg, star  stats(N r2 r2_a)
 This command summarizes OLS, LSDV, Fixed model, and absorbed regression into a table. The star option tells it to use them in order to show 
 significance. stats(N r2 r2_a) tells stata to show total number of observations, r- square and adjusted r square.
 ............................................................................................................................................
- 
+Caution about Fixed Effect: Do not include time invariant dummies like gender etc.
+If you beleive that differences among the entities have an effect on the DV, use REM. You may include time invariant dummies as well in the 
+random effect model.
+............................................................................................................................................
+
+xtreg nim l.size, re
+estimates store random 
+
+xtreg is a command which is used to run regrerssions according to different models. re option specifies that we want to use the Random Effect
+Model and stores it into a estimate named random.
+............................................................................................................................................
+
+estimates table ols lsdv fixed aregg random, star  stats(N r2 r2_a)
+
+see line number 312 for expanation the only difference is that random estimate has also been included in this list 
+This command gives the following output: 
+
+----------------------------------------------------------------------------------------------
+    Variable |      ols            lsdv            fixed           aregg          random      
+-------------+--------------------------------------------------------------------------------
+        size |
+         L1. |  1.312e-09*     -8.794e-09***   -8.794e-09***   -8.794e-09***   -9.599e-10     
+             |
+        bank |
+         44  |                  6.443e-09**                                                   
+         62  |                 -6.157e-08***                                                  
+         74  |                  1.081e-08***                                                  
+         92  |                  2.129e-09                                                     
+        108  |                  4.363e-08***                                                  
+        114  |                  2.025e-09                                                     
+        123  |                 -1.952e-09                                                     
+        140  |                  1.010e-08***                                                  
+        165  |                  7.634e-09**                                                   
+        166  |                  3.897e-08***                                                  
+             |
+       _cons | -2.577e-08*      1.580e-07***    1.652e-07***    1.652e-07***    1.576e-08     
+-------------+--------------------------------------------------------------------------------
+           N |         49              49              49              49              49     
+          r2 |  .11748441       .82558777       .51911341       .82558777                     
+        r2_a |  .09870749       .77373548       .37614713       .77373548                     
+----------------------------------------------------------------------------------------------
+                                                      legend: * p<0.05; ** p<0.01; *** p<0.001
+
+the result of each model is shown. But OLS is not used for panel. It is incorrect 
+1:33:21 
