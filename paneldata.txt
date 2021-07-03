@@ -1,0 +1,266 @@
+Panel data is the combination of cross sectional data and time series. 
+Panel data gives us a higher degree of freedom as we combine cross-sectional data and time series so the number of observations increase 
+
+If N = cross-sectional data (No of obs.) and T = time series 
+Then there are two types of panel data 
+Short Panel   and   Long Panel 
+
+In short panel --> N > T (i.e. cross-sectional variables are greater then time series) [e.g. data of 10 banks in 5 years]
+In Long panel --->  T > N  (i.e. time series is greater then time series) [e.g data of 5 banks over a period of 10 years]
+
+Panel may be balanced or unbalanced. 
+balanced ----> T remains constant over N  (i.e there is no missing time period)
+unbalanced >>> T is not constant over N (i.e there are missing time periods)
+
+EXAMPLE::::
+
+Data we have : (balanced)
+
+Banks 			Year
+1               2001 
+1               2002
+1               2003
+1               2004
+2               2001
+2               2002
+2               2003
+2               2004
+3               2001
+3               2002
+3               2003
+3               2004
+4               2001
+4               2002
+4               2003
+4               2004
+
+Unbalanced: 
+
+1 2001
+1 2003
+1 2004
+2 2001
+2 2002
+2 2005
+3 2001
+3 2002
+4 2001
+4 2005
+
+<--------------------------------------- ------------------------------------------------->
+sometimes xtset bank year can give error --> "repeated time values within panel data"
+this mean that there are more then 1 obs for a bank in a certain year i.e 2 observations in same year
+e.g. there are two observation for bank alfalah in 2001
+to solve this issue we need to remove extra values 
+Now: 
+
+. duplicates report bank year 
+
+--------------------------------------
+   copies | observations       surplus
+----------+---------------------------
+        1 |        34656             0
+        2 |         3968          1984
+        3 |           60            40
+--------------------------------------
+this table shows copies of each bank.
+1 means that there is only one obs and no duplicate
+2 means that there are two identical observations 
+e.g:
+
+|------------|
+|alfalah 2001|
+|alfalah 2001|
+|------------|
+
+3 means that there are three identical observations
+e.g.
+
+|------------|
+|alfalah 2004|
+|alfalah 2004|
+|alfalah 2004|
+|------------|
+
+From above table we learn that there are 3968 observation which are duplicate. surplus shows us how many observations we want to remove i.e. we need to remove 1984 observations.
+Also there are 60 observations having 3 copies. surplus shows us how many observations we want to remove i.e. we need to remove 40 observations.
+............................................................................................................................................
+. duplicates list bank year 
+(provides list of duplicate observations)
+<!----- Below list is incomplete.. Run Command on stata to see complete list ---->
+
+  |   1713   18092                                                                                      Intesa Mediofactoring SpA   2012 |
+  |   1713   18093                                                                                      Intesa Mediofactoring SpA   2012 |
+  |   1714   18094                                                                                                Intesa Sanpaolo   2002 |
+  |   1714   18095                                                                                                Intesa Sanpaolo   2002 |
+............................................................................................................................................
+.duplicates tag bank year, gen(isdup)
+order isdup
+
+tells stata to tag all duplicates of bank by year and to generate tags as a variable named isdup and to bring it into the beginning of the data.
+(go to stata, run these commands and look in edit window for viewing result)
+
+
+.tabulate isdup 
+
+
+      isdup |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     34,656       89.59       89.59
+          1 |      3,968       10.26       99.84
+          2 |         60        0.16      100.00
+------------+-----------------------------------
+      Total |     38,684      100.00
+
+We can see from this table that almost 10% of total observations were duplicates
+............................................................................................................................................
+MAIN COMMAND WHICH REMOVES DUPLICATE OBSERVATIONS ----> 
+. drop if isdup !=0
+
+this command tells stata to delete all observations in which the value of isdup is not equal to zero 
+this mean that all duplicate observations will be deleted.
+
+Now if we run . xtset bank year it will run without error
+............................................................................................................................................
+
+. gen fcdummy = 0
+
+. replace fcdummy = 1 if year > 2006 & year < 2009
+
+generates a dummy variable named fcdummy which is 1 if the year is between 2006 and 2009 
+
+............................................................................................................................................
+
+. gen sdc = 0 
+
+replace sdc =1 if year == 2009
+
+generates a dummy variable named sdc which is one when the year is 2009 
+
+............................................................................................................................................
+
+. gen crd = 0
+
+replace crd = 1 if year > 2010
+
+generates a dummy variable named crd which is 1 if the year is greater then 2010
+
+............................................................................................................................................
+
+. gen fcsize = fcdummy * size
+
+order  fcdummy fcsize size year
+
+generates a interaction term of fcdummy(financial crisis dummy) and size(bank size) named fcsize.
+
+............................................................................................................................................
+
+. drop if missing(size)
+
+drops the observation if size is not present(i.e. it is missing).
+
+............................................................................................................................................
+
+. outsheet using Data\Euro_Banks_Panel.csv, comma replace 
+
+this command 'outsheets' or saves file Euro_Banks_Panel.csv 
+
+............................................................................................................................................
+
+. save Data\Data_Panel.dta, replace 
+
+this command saves the file named Data_Panel.dta
+
+............................................................................................................................................
+
+keep name bank country year rwata roa roe nim size liq loanhhi lr 
+
+keeps the above variables and removes the rest.
+
+............................................................................................................................................
+
+. save Data\Data_Panel_Reduced.dta, replace 
+
+saves this file as Data_Panel_Reduced.dta 
+
+............................................................................................................................................
+
+. keep if country == 1
+
+
+this command deletes all observations except observations having country = 1 i.e. AUSTRIA
+
+............................................................................................................................................
+
+. drop in 90/2852
+
+drops the observations from 90 to 2852
+
+............................................................................................................................................
+
+. xtline rwata
+
+draws graphs of rwata(Risk Weighted Assets to Total Assets) according to each individual bank. xtline give seperate graph for each banks
+
+............................................................................................................................................
+
+. egen bankid = group(bank)
+
+makes groups of banks and generates bankid. bankid has the group number
+each bank has seperate group. e.g. alfalah has bankid 1 habib bank has bankid 2 and so on
+
+............................................................................................................................................
+
+. xtset bankid year 
+
+this command sets panel data by bankid (N) and year (T).
+
+. xtline rwata
+
+Now graph will have bankid instead of bank names. It shows how each variable moves over the time periods
+
+............................................................................................................................................
+
+. xtline rwata, overlay 
+
+This will make a single graph for all banks instead of different graphs.
+
+.............................................................................................................................................
+
+. bysort bank: egen mean_size = mean(size)
+
+This command will generate a variable mean_size which will be the mean of the size variable.
+
+............................................................................................................................................
+
+twoway scatter size bank
+
+Makes a scatter graph of size and bank
+
+............................................................................................................................................
+
+twoway scatter mean_size bank
+
+Makes a scatter diagran of mean of size and of bank
+............................................................................................................................................
+
+twoway scatter size bankid, msymbol(circle_hollow) || connected mean_size bankid, msymbol(diamond) 
+
+This command tells you Stata to draw a scatter diagram of size and bankid, it tells it to use hollow circles in order to denote mean, it 
+also tells it to draw a connected line which joins all the means of size  with diamond as a mean symbol.
+............................................................................................................................................
+
+<---> Why we dont use OLS in panel data? <---> 
+OLS is not suitable for panel data as OLS tends to think that each observation is independant i.e. 
+it thinks that bank alfalah 2001 observation and bank alfalah 2002 are different and unique. Due to this the result may or may not be accurate
+There can be two types of variations in panel data, at cross sectional level or at time level. Therfore instead of using OLS ( Ordinary Least Squares) we can use three other models:
+------------------------------
+1). LSDV model in panel data 
+The full form of LSDV is Least Square dummy variable
+------------------------------
+2). ????????????????????????
+Ask from someone
+------------------------------
+3). Random Effect Model 
+------------------------------
+............................................................................................................................................
