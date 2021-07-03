@@ -397,3 +397,7 @@ Here null hypothesis is that difference in coefficints is not systematic. as can
 Meaning that there are no differences at individual level cross sectional data. This means that we will use fixed 
 system as differences exist . As we can see that the probability is significant therefore we will reject the null hypothesis and will 
 choose the alternate hypothesis. 
+
+
+
+CHECKSUM ===== 000001
