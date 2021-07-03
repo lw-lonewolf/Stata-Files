@@ -355,5 +355,45 @@ This command gives the following output:
 ----------------------------------------------------------------------------------------------
                                                       legend: * p<0.05; ** p<0.01; *** p<0.001
 
-the result of each model is shown. But OLS is not used for panel. It is incorrect 
-1:33:21 
+the result of each model is shown. But OLS is not used for panel. It is incorrect
+
+............................................................................................................................................
+There are two equations 
+fixed effect : Yh =  Ai + B1X1 + B2X2 + Ui
+random effect : Yh = A + B1X1 + B2X2 + ui + E1 
+-------------> : Yh = A + B1x1 + b2x2 + w1 
+here w1 = u1+ E1
+
+Main difference between both is that in first equation alpha is variating that is it is different for every variable
+on the other hand in second equation alpha is constant. This is constant i.e. for example id there are ten banks then 
+all then banks have the same conditions and problems. All of them are operating in the same economy. Due to this alpha 
+is constant in random effect model
+
+also calculating the individual values of u1 or e1 is not possible. Only w1 can be calculated
+..............................................................................................................................................
+HAUSMAN 
+
+hausman fixed random 
+
+here fixed and random are the name of the estimates that we stored above
+
+                ---- Coefficients ----
+             |      (b)          (B)            (b-B)     sqrt(diag(V_b-V_B))
+             |     fixed        random       Difference          S.E.
+-------------+----------------------------------------------------------------
+        size |
+         L1. |   -8.79e-09    -9.60e-10       -7.83e-09        9.04e-10
+------------------------------------------------------------------------------
+                           b = consistent under Ho and Ha; obtained from xtreg
+            B = inconsistent under Ha, efficient under Ho; obtained from xtreg
+
+    Test:  Ho:  difference in coefficients not systematic
+
+                  chi2(1) = (b-B)'[(V_b-V_B)^(-1)](b-B)
+                          =       75.12
+                Prob>chi2 =      0.0000
+
+Here null hypothesis is that difference in coefficints is not systematic. as can be seen from above ^ 
+Meaning that there are no differences at individual level cross sectional data. This means that we will use fixed 
+system as differences exist . As we can see that the probability is significant therefore we will reject the null hypothesis and will 
+choose the alternate hypothesis. Therfore
