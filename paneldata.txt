@@ -296,4 +296,20 @@ fe options stand for 'f'ixed 'e'ffect
 estimates table ols lsdv fixed, star stats(N)
 
 This command will show the output of all three models. The option star means that stata will use stars to show significance while tha option 
-stats(N) tells stata to give total number of observations "N" in result as well 
+stats(N) tells stata to give total number of observations "N" in result as well.
+............................................................................................................................................
+
+areg nim l.size, absorb(bank)
+estimates store aregg
+
+These commands will run absorbed regression ( it will absorb indicators i.e. it wont show result for each individual bank). The absorb(bank)
+option tells stata which variable to absorb. The other command stores this aregression into estimate named aregg
+
+............................................................................................................................................
+
+estimates table ols lsdv fixed aregg, star  stats(N r2 r2_a)
+
+This command summarizes OLS, LSDV, Fixed model, and absorbed regression into a table. The star option tells it to use them in order to show 
+significance. stats(N r2 r2_a) tells stata to show total number of observations, r- square and adjusted r square.
+............................................................................................................................................
+ 
