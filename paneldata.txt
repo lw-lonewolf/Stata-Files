@@ -283,4 +283,17 @@ These command runs OLS model and stores it into a estimate named ols
 reg nim l.size i.bank
 estimates store lsdv
 
+These commands run the LSDV model and stores it into a estimate named lsdv
+
 ............................................................................................................................................
+
+xtreg nim l.size, fe
+estimates store fixed 
+
+These commands run fixed effect model and store it in a estimate named fixed. 
+fe options stand for 'f'ixed 'e'ffect 
+............................................................................................................................................
+estimates table ols lsdv fixed, star stats(N)
+
+This command will show the output of all three models. The option star means that stata will use stars to show significance while tha option 
+stats(N) tells stata to give total number of observations "N" in result as well 
