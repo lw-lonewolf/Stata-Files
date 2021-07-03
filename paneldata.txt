@@ -396,4 +396,4 @@ here fixed and random are the name of the estimates that we stored above
 Here null hypothesis is that difference in coefficints is not systematic. as can be seen from above ^ 
 Meaning that there are no differences at individual level cross sectional data. This means that we will use fixed 
 system as differences exist . As we can see that the probability is significant therefore we will reject the null hypothesis and will 
-choose the alternate hypothesis. Therfore
+choose the alternate hypothesis. 
