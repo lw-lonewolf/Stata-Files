@@ -1,0 +1,43 @@
+### In this file we have discussed deseasoning
+
+........................................................................................................................................
+Some times there is effect of season on data
+For example if we want to see what effect the advertisement campaign of haier company has effect on sale 
+Now in summer there is more sale of ACs. Now we deseason it so that the effect of season is removed and so that we 
+can find out if the ad campaign has effect on haier's sale.
+........................................................................................................................................
+. tsset date, quarterly 
+
+set time series according to quarters
+........................................................................................................................................
+. tsline dish
+. tsline disp 
+. tsline frig
+. tsline wash 
+. tsline dur 
+
+from all the above graphs we can see that the data has different trends in different seasons 
+........................................................................................................................................
+If we check data we will see that there is data in the form of 4 quarters 
+
+2001q1
+2001q2
+2001q3
+2001q4
+
+Also we know that this data has seasonal variation. 
+........................................................................................................................................
+Time Series Quarterly Data is combination of four things 
+
+T = s + t + c + u 
+
+s = seasonal 
+t = trend 
+c = cyclical 
+u = random component 
+.........................................................................................................................................
+
+. generate quarter = quarter(dofq(date))
+
+the variable named date has format %tq this means that the data is in yyyy-q#
+this command will then 
