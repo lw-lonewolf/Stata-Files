@@ -1,0 +1,56 @@
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+SIR STARTED FROM LINE NUMBER 17
+
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+. insheet using Data\incmon.csv, clear 
+
+loads data incmon
+
+.............................................................................................................................
+ . gen y = (2/(1-0.8)) + (u/(1-0.8)) + (i/(1-0.8))
+ . gen c = 2 + 0.8*y + u
+This command will generate income values and Consumption values 
+for equation see slide 10 in SEM slides
+
+. label variable y "Income"
+. label variable c "Consumption"
+
+
+labels it as income and consumption respectively. 
+.............................................................................................................................
+. reg c y
+
+
+      Source |       SS           df       MS      Number of obs   =        20
+-------------+----------------------------------   F(1, 18)        =   3272.87
+       Model |  123.918476         1  123.918476   Prob > F        =    0.0000
+    Residual |  .681521157        18  .037862286   R-squared       =    0.9945
+-------------+----------------------------------   Adj R-squared   =    0.9942
+       Total |  124.599997        19   6.5578946   Root MSE        =    .19458
+
+------------------------------------------------------------------------------
+           c |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           y |   .8206522   .0143448    57.21   0.000     .7905149    .8507895
+       _cons |   1.494021   .3541307     4.22   0.001       .75002    2.238022
+------------------------------------------------------------------------------
+
+This command will give the following results. 
+..................................................................................................................................
+insheet using Data\incmon.csv, clear 
+
+loads incmon data
+
+reg gdpy1 gdpix1 fedexp9x2
+
+runs regression on some variables
+
+. predict y1 
+. reg m2y2 y1 
+
+ivregress 2sls m2y2 (gdpy1 = gdpix1 fedexp9x2)
+ivregress 2sls m2y2 (gdpy1 = gdpix1 fedexp9x2), first 
+
+runs 2sls on variables. 
