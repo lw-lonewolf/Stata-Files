@@ -40,4 +40,43 @@ u = random component
 . generate quarter = quarter(dofq(date))
 
 the variable named date has format %tq this means that the data is in yyyy-q#
-this command will then 
+this command will then seperate the quarters from the data and put them into a variable named quarter
+.........................................................................................................................................
+. tabulate quarter, gen(q)
+
+This command will show us details of the quarters and will create a quarter variables = q1,  q2, q3, q4
+
+.........................................................................................................................................
+
+Frig = beta1Q1 + beta2Q2 + beta1Q3 + beta1Q4 + ui
+
+.........................................................................................................................................
+
+ . reg frig q1 q2 q3 q4, nocon
+
+
+      Source |       SS           df       MS      Number of obs   =        32
+-------------+----------------------------------   F(4, 28)        =    518.00
+       Model |  59654886.6         4  14913721.7   Prob > F        =    0.0000
+    Residual |  806142.375        28  28790.7991   R-squared       =    0.9867
+-------------+----------------------------------   Adj R-squared   =    0.9848
+       Total |    60461029        32  1889407.16   Root MSE        =    169.68
+
+------------------------------------------------------------------------------
+        frig |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+          q1 |   1222.125   59.99041    20.37   0.000      1099.24     1345.01
+          q2 |     1467.5   59.99041    24.46   0.000     1344.615    1590.385
+          q3 |    1569.75   59.99041    26.17   0.000     1446.865    1692.635
+          q4 |       1160   59.99041    19.34   0.000     1037.115    1282.885
+------------------------------------------------------------------------------
+
+
+These are results that are calculated by running regression on frig with q1 q2 q3 and q4 as independant variables
+
+................................................................................................................................................................
+. predict r, resid
+. reg frig q2 q3 q4
+. predict ui, resid 
+
+Predict r
