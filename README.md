@@ -1,4 +1,4 @@
-# FILES FOR STUDY 
+# STATA Paper Preperation assistance
 These are files for performing different tasks in STATA
 
 Table of contents: 
