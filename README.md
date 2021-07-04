@@ -1,2 +1,2 @@
 # FILES FOR STUDY 
-these are files for respective work
+These are files for performing different tasks in STATA
