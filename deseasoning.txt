@@ -48,7 +48,7 @@ This command will show us details of the quarters and will create a quarter vari
 
 .........................................................................................................................................
 
-Frig = beta1Q1 + beta2Q2 + beta1Q3 + beta1Q4 + ui
+Frig = beta1Q1 + beta2Q2 + beta3Q3 + beta4Q4 + ui
 
 .........................................................................................................................................
 
@@ -76,7 +76,15 @@ These are results that are calculated by running regression on frig with q1 q2 q
 
 ................................................................................................................................................................
 . predict r, resid
-. reg frig q2 q3 q4
 . predict ui, resid 
 
-Predict r
+this command will predict the residuals.
+
+. reg frig q2 q3 q4 
+
+These command will run regression on frig. It is similiar to the upper regression but in this regression q1 has been dropped and constant alpha has been included
+When we want to include constant (alpha) into the equation we drop one of the iv(in this case q1).
+
+thus the equation becomes ---> Frig =   Alpha1 + Beta1Q2 + Beta1Q3 + Beta1Q4 + ui
+
+.................................................................................................................................................................
