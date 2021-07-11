@@ -10,13 +10,7 @@ This loads up the file 'sample.csv' file from the given website.
 
 Draws scatter graph of hon and math and fits a normal line of hon and math 
 
-......................................................................................................................
 
-. tabulate hon 
-
-This gives detail of 'hon' variable 
-
-......................................................................................................................
 
 From formula.png file we can see that in Formula 2: logit p is equal to log(P/1-P) also 
 P is equal to Pr(Y=1). The value of Pr(y=1) can be seen from the first formula.
@@ -24,3 +18,61 @@ P is equal to Pr(Y=1). The value of Pr(y=1) can be seen from the first formula.
 
 Concept of Probabilty: 
 Suppose that I say you have 80% chance of passing. Then there is obviously 20% chance of failure. Thus we can say that the Probabilty of success is 0.8 and that of failure is 0.2.
+.....................................................................................................................
+
+. logit hon 
+
+this command runs logitic regression on honours variable 
+
+It gives the following results:
+
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+Logistic regression                             Number of obs     =        200
+                                                LR chi2(0)        =       0.00
+                                                Prob > chi2       =          .
+Log likelihood = -111.35502                     Pseudo R2         =     0.0000
+
+------------------------------------------------------------------------------
+         hon |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _cons |   -1.12546   .1644101    -6.85   0.000    -1.447697   -.8032217
+------------------------------------------------------------------------------
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+.....................................................................................................................
+
+. tabulate hon 
+
+
+        hon |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        151       75.50       75.50
+          1 |         49       24.50      100.00
+------------+-----------------------------------
+      Total |        200      100.00
+
+
+This gives detail of 'hon' variable 
+.....................................................................................................................
+
+The next commands at line number 10 to 13 show us the working of the above command at the backend. 
+
+. gen prs = 49/200
+
+This generates probability of success(by dividing number of passing students divided by total students)
+
+. gen prf = 151/200 
+
+This command generates  the Probabilty of failure(by dividiing the number of failing students by total students)
+
+. gen odds = prs/prf
+
+This generate the odds of success to failure. Thus
+
+. gen lodds = log(odds)
+
+This generates the logarithms of the odds.
+
+We can see from the edit window that the value of lodds is -1.1254594. This value is the same as that of the 
+co-efficient given in the above command (logit hon). {-1.1254594 rounded off is -1.12546}
+
