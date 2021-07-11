@@ -75,5 +75,42 @@ This generates the logarithms of the odds.
 
 We can see from the edit window that the value of lodds is -1.1254594. This value is the same as that of the 
 co-efficient given in the above command (logit hon). {-1.1254594 rounded off is -1.12546}
+
+Commands 20-23 is another example. First we calculate probabilty of success if you are male (prm) then probability of success if you are female(prfe). Then we calculate the oddsf and then the logarithm of oddsf.
+loddsf = .59278226
+
+Output of logit hon female: 
+
+
+Logistic regression                             Number of obs     =        200
+                                                LR chi2(1)        =       3.10
+                                                Prob > chi2       =     0.0781
+Log likelihood = -109.80312                     Pseudo R2         =     0.0139
+
+------------------------------------------------------------------------------
+         hon |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      female |   .5927822   .3414294     1.74   0.083    -.0764072    1.261972
+       _cons |  -1.470852   .2689555    -5.47   0.000    -1.997995   -.9437087
+------------------------------------------------------------------------------
+ And as we can see the values match
+
+
 .....................................................................................................................
-a
+
+logistic hon
+
+Runs logistic regression
+
+logistic hon female 
+tabulate hon female 
+
+.....................................................................................................................
+
+Difference b/w logit command and logistics commands
+The main difference both is that each reports a different thing 
+logit -- Logistic regression, reporting coefficients
+logistic -- Logistic regression, reporting odds ratios
+
+....................................................................................................................
+
