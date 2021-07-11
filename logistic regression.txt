@@ -76,3 +76,4 @@ This generates the logarithms of the odds.
 We can see from the edit window that the value of lodds is -1.1254594. This value is the same as that of the 
 co-efficient given in the above command (logit hon). {-1.1254594 rounded off is -1.12546}
 
+Checking out a merge
