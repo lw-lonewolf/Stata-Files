@@ -12,6 +12,3 @@ Draws scatter graph of hon and math and fits a normal line of hon and math
 
 ......................................................................................................................................................
 . tabulate hon 
-
-
-kckvjckcjvjckvkcvckvjkvjkvjckjvkjjcjkcjkj
