@@ -19,4 +19,8 @@ This gives detail of 'hon' variable
 ......................................................................................................................
 
 From formula.png file we can see that in Formula 2: logit p is equal to log(P/1-P) also 
-P is equal to Pr(Y=1). The value of Pr(y=1) can be seen from the first formula
+P is equal to Pr(Y=1). The value of Pr(y=1) can be seen from the first formula.
+.....................................................................................................................
+
+Concept of Probabilty: 
+Suppose that I say you have 80% chance of passing. Then there is obviously 20% chance of failure. Thus we can say that the Probabilty of success is 0.8 and that of failure is 0.2.
